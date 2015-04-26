@@ -58,13 +58,20 @@ $(PROGNAME): $(OBJ) squirrel
 
 
 
-squirrel: 
+squirrel: src/*.cpp
 	cd src/sc_Squirrel3 ; make sq$(CPU_BITS)
+
+tags:
+	ctags -R src
+	cscope -bR
+
 
 clean:
 	@rm -rf obj
 	@cd src/sc_Squirrel3 ; make clean
 	@rm -f $(PROGNAME)
+	@rm -f tags cscope.out
+	@rm -f FabDatabaseOutput.sql
 
 mrproper: clean
 	rm -rf $(PROGNAME)
