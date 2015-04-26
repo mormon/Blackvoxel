@@ -72,6 +72,7 @@ clean:
 	@rm -f $(PROGNAME)
 	@rm -f tags cscope.out
 	@rm -f FabDatabaseOutput.sql
+	@rm -f Log.txt
 
 mrproper: clean
 	rm -rf $(PROGNAME)
