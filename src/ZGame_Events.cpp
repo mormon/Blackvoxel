@@ -121,10 +121,18 @@ Bool ZGame_Events::KeyDown( UShort KeySym )
                     if (!GameEnv->Settings_Hardware->Experimental_LearningMode) break;
                     ULong SlotNum = 20;
                     ZInventory * Inv = Actor->Inventory;
-                    if (KeySym==SDLK_j) Actor->LearningModePage ++;
-                    else                {if((Actor->LearningModePage--)==0) Actor->LearningModePage = 3; }
+                    int lmp;
+                    lmp = Actor->LearningModePage;
+                    lmp += ( KeySym==SDLK_k ? 1 : -1 );
+                    if (lmp > 3) 
+                        lmp = 1;
+                    else if (lmp < 1)
+                        lmp = 3;
+                    Actor->LearningModePage = lmp;
+                    // if (KeySym==SDLK_j) Actor->LearningModePage ++;
+                    // else                {if((Actor->LearningModePage--)==0) Actor->LearningModePage = 3; }
 
-                    printf("Page : %d\n",Actor->LearningModePage);
+                    // printf("Page : %d\n",Actor->LearningModePage);
                     switch (Actor->LearningModePage)
                     {
                       default: Actor->LearningModePage = 1;
