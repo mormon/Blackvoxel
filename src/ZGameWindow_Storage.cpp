@@ -61,13 +61,14 @@ void ZGameWindow_Storage::Show()
   GameEnv->GuiManager.AddFrame(MainWindow);
 
     // CloseBox
+    // Close Box is evil and causes AtomicCompressor involuntary destruction
 
-  Size.x = 32.0f; Size.y = 32.0f;
-  CloseBox.SetPosition(MainWindow_Size.x - Size.x - 5.0f, 5.0f);
-  CloseBox.SetSize(Size.x, Size.y);
-  CloseBox.SetTileSet(GameEnv->GuiTileset);
-  CloseBox.SetTile(11);
-  MainWindow->AddFrame(&CloseBox);
+  // Size.x = 32.0f; Size.y = 32.0f;
+  // CloseBox.SetPosition(MainWindow_Size.x - Size.x - 5.0f, 5.0f);
+  // CloseBox.SetSize(Size.x, Size.y);
+  // CloseBox.SetTileSet(GameEnv->GuiTileset);
+  // CloseBox.SetTile(11);
+  // MainWindow->AddFrame(&CloseBox);
 
   // Inventory main title
 
