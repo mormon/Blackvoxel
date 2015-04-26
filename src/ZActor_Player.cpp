@@ -1887,8 +1887,16 @@ void ZActor_Player::DoPhysic_SupermanPlayer(double CycleTime)
 
 void ZActor_Player::Action_GoFastForward(double speed)
 {
-  Deplacement.x += sin(ViewDirection.yaw/180.0 * 3.14159265)*speed;
-  Deplacement.z += cos(ViewDirection.yaw/180.0 * 3.14159265)*speed;
+  #define PI  3.14159265
+  double dx, dy, dz, shoriz;
+  dy = sin(ViewDirection.pitch/180.0 * PI) * speed;
+  shoriz = cos(ViewDirection.pitch/180.0 * PI) * speed;
+  dx = sin(ViewDirection.yaw/180.0 * PI) * shoriz;
+  dz = cos(ViewDirection.yaw/180.0 * PI) * shoriz;
+
+  Deplacement.y += dy;
+  Deplacement.x += dx;
+  Deplacement.z += dz;
 }
 
 void ZActor_Player::Action_GoForward()
