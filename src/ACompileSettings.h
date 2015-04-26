@@ -32,7 +32,7 @@
 
 // Options à inclure : -mfpmath=sse -msse2
 
-#define DEVELOPPEMENT_FORCE_DEV 0 // If you are making development, set it to 1
+#define DEVELOPPEMENT_FORCE_DEV 1 // If you are making development, set it to 1
 
 // Dev options forced ?
 
@@ -125,7 +125,7 @@
 
 #ifdef __linux__
 
-  #define COMPILEOPTION_SAVEFOLDERNAME "Blackvoxel"
+  #define COMPILEOPTION_SAVEFOLDERNAME ".config/blackvoxel"
   #define COMPILEOPTION_USEHOMEDIRSTORAGE 1
   #define COMPILEOPTION_WINXPTIMECOMPUTING 0
 
