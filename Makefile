@@ -15,6 +15,7 @@ PROGNAME=blackvoxel
 CFLAGS=-I "src/sc_Squirrel3/include"  -DCOMPILEOPTION_DEMO=0 -DDEVELOPPEMENT_ON=0 -DCOMPILEOPTION_SPECIAL=0 -DCOMPILEOPTION_DATAFILESPATH="\"$(blackvoxeldatadir)\""
 SRC= $(wildcard src/*.cpp) $(wildcard src/z/*.cpp)
 OBJ= $(SRC:src/%.cpp=obj/%.o)
+OUT=./obj/z
 
 # Operating system and architecture detection
 
@@ -45,34 +46,42 @@ else
     LDFLAGS=-s -L"src/sc_Squirrel3/lib" -lGLU -lSDL -lGLEW -lGL -lsquirrel -lsqstdlib
   endif
 endif
+export CPU_BITS
 
 
-obj/%.o: src/%.cpp
-	@mkdir -p obj/z
+obj/%.o: src/%.cpp | $(OUT)/
 	$(CC) -o $@ -c $< $(CFLAGS) 
 	
 all: $(PROGNAME)
 
-$(PROGNAME): $(OBJ) squirrel
+$(OUT)/:
+	@mkdir -p $@
+
+$(PROGNAME): $(OBJ)
+	$(MAKE) -C src/sc_Squirrel3
 	$(LD) -o $(PROGNAME) $(OBJ) $(LDFLAGS)
 
+tagfiles: tags cscope.out
 
-
-squirrel: src/*.cpp
-	cd src/sc_Squirrel3 ; make sq$(CPU_BITS)
-
-tags:
+tags: src/*.cpp src/*.h\
+	src/sc_Squirrel3/squirrel/*.cpp src/sc_Squirrel3/squirrel/*.h\
+	src/sc_Squirrel3/sqstdlib/*.cpp src/sc_Squirrel3/sqstdlib/*.h\
+	src/sc_Squirrel3/sq/*.c
 	ctags -R src
+
+cscope.out: src/*.cpp src/*.h
 	cscope -bR
 
 
-clean:
+clean: cleantags
 	@rm -rf obj
 	@cd src/sc_Squirrel3 ; make clean
 	@rm -f $(PROGNAME)
-	@rm -f tags cscope.out
 	@rm -f FabDatabaseOutput.sql
 	@rm -f Log.txt
+
+cleantags:
+	@rm -f tags cscope.out
 
 mrproper: clean
 	rm -rf $(PROGNAME)
@@ -141,4 +150,5 @@ debian_binary_package_install:
 	chmod -R u=rwX,g=rX,o=rX $(DESTDIR)/usr/share/icons/hicolor/128x128/apps/blackvoxel.png
 	chmod -R u=rwX,g=rX,o=rX $(DESTDIR)/usr/share/applications/blackvoxel.desktop
 	
-.PHONY: clean mrproper squirrel install debian_binary_package_install
+.PHONY: all clean cleantags tagfiles mrproper squirrel install debian_binary_package_install
+# vim: set tabstop=4:softtabstop=4:shiftwidth=4:noexpandtab
