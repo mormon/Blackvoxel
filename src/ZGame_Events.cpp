@@ -124,15 +124,11 @@ Bool ZGame_Events::KeyDown( UShort KeySym )
                     int lmp;
                     lmp = Actor->LearningModePage;
                     lmp += ( KeySym==SDLK_k ? 1 : -1 );
-                    if (lmp > 3) 
+                    if (lmp > 4) 
                         lmp = 1;
                     else if (lmp < 1)
-                        lmp = 3;
+                        lmp = 4;
                     Actor->LearningModePage = lmp;
-                    // if (KeySym==SDLK_j) Actor->LearningModePage ++;
-                    // else                {if((Actor->LearningModePage--)==0) Actor->LearningModePage = 3; }
-
-                    // printf("Page : %d\n",Actor->LearningModePage);
                     switch (Actor->LearningModePage)
                     {
                       default: Actor->LearningModePage = 1;
@@ -159,7 +155,7 @@ Bool ZGame_Events::KeyDown( UShort KeySym )
                               Inv->SetSlot(SlotNum++,96, 8192);
                               Inv->SetSlot(SlotNum++,0, 0);
                               break;
-                      case 2:
+                      case 2: 
                               Inv->SetSlot(SlotNum++, 90, 8192);
                               Inv->SetSlot(SlotNum++,99 , 8192);
                               Inv->SetSlot(SlotNum++,100, 8192);
@@ -175,7 +171,8 @@ Bool ZGame_Events::KeyDown( UShort KeySym )
 
                               while(SlotNum<40) Inv->SetSlot(SlotNum++, 0, 0);
                               break;
-                      case 3: Inv->SetSlot(SlotNum++, 1, 8192);
+                      case 3: // blackrocks
+                              Inv->SetSlot(SlotNum++, 1, 8192);
                               Inv->SetSlot(SlotNum++, 2, 8192);
                               Inv->SetSlot(SlotNum++, 3, 8192);
                               Inv->SetSlot(SlotNum++, 4, 8192);
@@ -185,6 +182,23 @@ Bool ZGame_Events::KeyDown( UShort KeySym )
                               Inv->SetSlot(SlotNum++, 8, 8192);
                               Inv->SetSlot(SlotNum++, 9, 8192);
                               Inv->SetSlot(SlotNum++,10, 8192);
+                              while(SlotNum<40) Inv->SetSlot(SlotNum++, 0, 0);
+                              break;
+                      case 4: // machines
+                              Inv->SetSlot(SlotNum++, 107, 8192);
+                              Inv->SetSlot(SlotNum++, 114, 8192);
+                              Inv->SetSlot(SlotNum++, 130, 8192);
+                              Inv->SetSlot(SlotNum++, 131, 8192);
+                              Inv->SetSlot(SlotNum++, 132, 8192);
+                              Inv->SetSlot(SlotNum++, 133, 8192);
+                              Inv->SetSlot(SlotNum++, 134, 8192);
+                              Inv->SetSlot(SlotNum++, 142, 8192);
+                              Inv->SetSlot(SlotNum++, 139, 8192);
+                              Inv->SetSlot(SlotNum++, 136, 8192);
+                              Inv->SetSlot(SlotNum++, 172, 8192);
+                              Inv->SetSlot(SlotNum++, 173, 8192);
+                              Inv->SetSlot(SlotNum++, 196, 8192);
+                              Inv->SetSlot(SlotNum++,  75, 8192);
                               while(SlotNum<40) Inv->SetSlot(SlotNum++, 0, 0);
                               break;
                     }
