@@ -81,7 +81,7 @@ class ZGameWindow_ResumeRequest : public ZFrame
   }
 
   void SetGameEnv(ZGame * GameEnv) {this->GameEnv = GameEnv;}
-  void SetMessage(char * Text) { Text_Text = Text; }
+  void SetMessage(const char * Text) { Text_Text = Text; }
 
   void Show();
   void Hide();
